@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "Json.js"></script>
+<script src = "ajax.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	var obtn = document.getElementById('btn');
+	obtn.onclick = function() {
+	    var xhr = null;
+	    try{
+	        xhr = new XMLHttpRequest();
+	    }catch(e){
+	        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+	    }
+	    //'+encodeURI('带')+'
+		xhr.open('get','2get.php?username=ss&'+ new Date().getTime(),true);
+	    xhr.send();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+					alert(xhr.responseText);
+				}else{
+					alert("error happen, Err:"+xhr.status);
+				}		
+			}
+		}
+	}
+}
+
+</script>
+</head>
+<body>
+    <input type="button" value="display" id="btn" />
+</body>
+</html>

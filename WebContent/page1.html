@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="2.txt">
+[1,2,3]
+</script>
+<script src = "Json.js"></script>
+
+<script src = "ajax.js"></script>
+
+<script type="text/javascript">
+window.onload = function() {
+	var obtn = document.getElementById('btn');
+	obtn.onclick = function() {
+		ajax('get','getNews.php','',function(data){
+			var data = JSON.parse(data);
+			var oul = document.getElementById('ul1');	
+			var html = '';
+			for(var i=0;i<data.length;i++){
+				html +='<li><a href="">'+data[i].title+'</a>[<span>'+data[i].date+'</span>]</li>';
+			}
+			oul.innerHTML = html;
+		});
+ 		setInterval(function(){
+ 			ajax('get','getNews.php','',function(data){
+ 				var data = JSON.parse(data);
+ 				var oul = document.getElementById('ul1');	
+ 				var html = '';
+ 				for(var i=0;i<data.length;i++){
+ 					html +='<li><a href="">'+data[i].title+'</a>[<span>'+data[i].date+'</span>]</li>';
+ 				}
+ 				oul.innerHTML = html;
+ 			});
+		},1000); 
+		
+	}
+}
+
+</script>
+</head>
+<body>
+    <input type="button" value="display" id="btn" />
+    <ul id="ul1"></ul>
+    method : get; post<br>
+    enctype : submit data format(geshi)
+    
+    <form action= "1.get.php" method = "post" enctype="application/x-www-form-urlencoded">
+    	<input type = "text" name="username"/>
+ 	    <input type = "text" name="age"/>
+    	<input type = "submit" value="submit"/>
+    	
+    </form>
+</body>
+</html>
